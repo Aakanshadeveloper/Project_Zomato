@@ -8,7 +8,7 @@ var MongoClient= mongo.MongoClient;
 const mongoUrl= process.env.Mongoliveurl;
 var cors = require('cors');
 const bodyParser = require('body-parser');
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3003;
 //db collection
 var db
 
@@ -50,7 +50,8 @@ app.get('/restrodata/:id',(req,res) => {
 })
 
 //query param exam
-app.get('/restrodata',(req,res) => {
+app.get('/restroapp',(req,res) => {
+    console.log(req.query.city)
     var query = {};
     if(req.query.city){
         query={state_id:Number(req.query.city)}
@@ -102,7 +103,7 @@ app.get('/filter/:mealid',(req,res) => {
         res.send(result) 
     })
 })
-//meanu======restromenu
+
 app.get('/menu/:restid',(req,res) => {
     var restid = Number(req.params.restid)
     db.collection('menu').find({restaurant_id:restid}).toArray((err,result) => {
